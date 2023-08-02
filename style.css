@@ -14,6 +14,7 @@
   
   .background{
     position: absolute;
+    height: 100%;
     width: 100vw;
   }
 
@@ -27,8 +28,8 @@
 
   .load {
     position: absolute;
-    width: 10%;
-    height: 10%;
+    width: 30%;
+    height: 20%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -37,12 +38,14 @@
   .ponte1{
     position: absolute;
     width: 100%;
+    height: 100%;
     animation: ponte-animation 15s infinite linear;
   }
 
   .ponte2{
     position: absolute;
     width: 100%;
+    height: 100%;
     animation: ponte-animation 15s infinite linear;
     animation-delay: 7.5s;
   }
@@ -82,6 +85,36 @@
     cursor: pointer;
     z-index: 1;
   }
+
+  @media screen and (max-width: 600px) {
+
+    .jorge {
+      width: 90px;
+      position: absolute;
+      bottom: 0;
+    }
+    .hide {
+      display: none;
+    }
+    
+    .inimigo {
+      right: 0%;
+      position: absolute;
+      bottom: -5px;
+      width: 80px;
+      animation: inimigo-animation 3s infinite linear;
+    }
+
+    .load {
+      position: absolute;
+      width: 40%;
+      height: 20%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    } 
+
+}
   
   
   @keyframes inimigo-animation {

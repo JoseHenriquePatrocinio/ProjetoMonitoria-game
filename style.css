@@ -2,76 +2,76 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  .game-board {
+}
+
+.game-board {
     height: 100vh;
     width: 100vw;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-  }
-  
-  .background{
+}
+
+.background {
     position: absolute;
     height: 100%;
     width: 100vw;
-  }
+}
 
-  .background2 {
+.background2 {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-  }
+}
 
-  .load {
+.load {
     position: absolute;
     width: 30%;
     height: 20%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }    
-  
-  .ponte1{
+}
+
+.ponte1 {
     position: absolute;
     width: 100%;
     height: 100%;
     animation: ponte-animation 15s infinite linear;
-  }
+}
 
-  .ponte2{
+.ponte2 {
     position: absolute;
     width: 100%;
     height: 100%;
     animation: ponte-animation 15s infinite linear;
     animation-delay: 7.5s;
-  }
-  
-  .jorge {
+}
+
+.jorge {
     width: 150px;
     position: absolute;
     bottom: 0;
-  }
-  .hide {
+}
+.hide {
     display: none;
-  }
-  
-  .inimigo {
+}
+
+.inimigo {
     right: 0%;
     position: absolute;
     bottom: -5px;
     width: 140px;
     animation: inimigo-animation 3s infinite linear;
-  }
+}
 
-  .hide {
+.hide {
     display: none;
-  }
+}
 
-  .restart-btn {
+.restart-btn {
     position: absolute;
     top: 20px;
     right: 10px;
@@ -84,81 +84,78 @@
     font-size: 24px;
     cursor: pointer;
     z-index: 1;
-  }
+}
 
-  @media screen and (max-width: 600px) {
-
+@media screen and (max-width: 600px) {
     .jorge {
-      width: 90px;
-      position: absolute;
-      bottom: 0;
+        width: 90px;
+        position: absolute;
+        bottom: 0;
     }
     .hide {
-      display: none;
+        display: none;
     }
-    
+
     .inimigo {
-      right: 0%;
-      position: absolute;
-      bottom: -5px;
-      width: 80px;
-      animation: inimigo-animation 3s infinite linear;
+        right: 0%;
+        position: absolute;
+        bottom: -5px;
+        width: 80px;
+        animation: inimigo-animation 3s infinite linear;
     }
 
     .load {
-      position: absolute;
-      width: 40%;
-      height: 20%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    } 
-
+        position: absolute;
+        width: 40%;
+        height: 20%;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
-  
-  
-  @keyframes inimigo-animation {
+
+@keyframes inimigo-animation {
     from {
-      right: 0%;
+        right: 0%;
     }
-  
+
     to {
-      right: 100%;
+        right: 100%;
     }
-  }
-  
-  @keyframes jump {
+}
+
+@keyframes jump {
     0% {
-      bottom: 0;
+        bottom: 0;
     }
-  
+
     40% {
-      bottom: 180px;
+        bottom: 180px;
     }
-  
+
     50% {
-      bottom: 180px;
+        bottom: 180px;
     }
-  
+
     60% {
-      bottom: 180px;
+        bottom: 180px;
     }
-  
+
     100% {
-      bottom: 0;
+        bottom: 0;
     }
-  }
+}
 
-  .jump {
+.jump {
     animation: jump 1s ease-in-out;
-  }
-  
-@keyframes ponte-animation {
-  from {
-    right: -100%;
-  }
+}
 
-  to {
-    right: 100%;
-  }
+@keyframes ponte-animation {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 100%;
+    }
 }

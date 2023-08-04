@@ -1,27 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" defer></script>
 
-    <title>Jorge Jump Cigar</title>
-  </head>
-  <body>
-    <div class="game-board">
-      <img src="/imgs/cenario/cidade.png" class="background" />
-      <img src="/imgs/cenario/ponte1.png" class="ponte1" />
-      <img src="/imgs/cenario/ponte2.png" class="ponte2" />
+        <title>Jorge Jump Cigar</title>
+    </head>
+    <body>
+        <div class="game-board">
+            <img src="/imgs/cenario/cidade.png" class="background" />
+            <img src="/imgs/cenario/ponte1.png" class="ponte1" />
+            <img src="/imgs/cenario/ponte2.png" class="ponte2" />
 
-      <img src="/imgs/movimento/estagio1caminhando.gif" class="jorge hide" id="jorge" />
-      <img src="/imgs/inimigos/cigarro.gif" class="inimigo hide" id="inimigo" />
-      <img src="/imgs/utilitarios/back.png" class="background2" id="backgroundId"/>
-      <img src="/imgs/utilitarios/load.gif" class="load" id="loadId"/>
-      
-      <button  class="restart-btn">Restart</button>
-    </div>
+            <img
+                src="/imgs/movimento/estagio1caminhando.gif"
+                class="jorge hide"
+                id="jorge"
+            />
+            <img
+                src="/imgs/inimigos/cigarro.gif"
+                class="inimigo inimigo-animation hide"
+                id="inimigo"
+            />
+            <img
+                src="/imgs/utilitarios/back.png"
+                class="background2"
+                id="backgroundId"
+            />
+            <img src="/imgs/utilitarios/load.gif" class="load" id="loadId" />
 
-    <a id="bottom"></a>
-  </body>
+            <button class="restart-btn">Restart</button>
+        </div>
+
+        <a id="bottom"></a>
+    </body>
 </html>

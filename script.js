@@ -90,7 +90,7 @@ const loop = setInterval(() => {
         vidaValor = vidaValor - 49;
         //trocarImagemInimigo();
         console.log(vidaValor);
-        if (jorgeMorreu(inimigoPosition, jorgePosition, ponte1Position, ponte2Position)) {
+        if (jorgeMorreu()) {
             setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position);
 
             clearInterval(loop);

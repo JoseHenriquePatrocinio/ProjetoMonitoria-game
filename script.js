@@ -5,6 +5,19 @@ const ponte2 = document.querySelector(".ponte2");
 const vidaImagem = document.querySelector(".vida");
 let vidaValor = 100;
 
+const mensagensInformativasPossiveis = [
+    `
+    Você sabia que o tabagismo é a maior causa de morte evitável do mundo?
+    Além de doenças respiratórias, o tabagismo causa impotência, infertilidade e úlcera.
+    O tabagismo pode causar cânceres de boca, faringe e laringe.
+    `,
+    `
+    O Brasil está no 8º lugar dos países que mais fumam. Você faz parte disso!
+    Fumar encurta 11 anos de sua vida. 
+    Após deixar o cigarro, o seu coração volta ao normal após  15 anos.
+    `,
+];
+
 const inimigosPosiveis = [
     "/imgs/inimigos/cigarro.gif",
     "/imgs/inimigos/narguile.gif",
@@ -49,12 +62,6 @@ function trocarImagemInimigo() {
         inimigosPosiveis[Math.floor(Math.random() * inimigosPosiveis.length)];
 }
 
-function reiniciarAnimacaoInimigo() {
-    inimigo.classList.remove("inimigo-animation");
-    inimigo.classList.add("inimigo-animation");
-    console.log("chegous");
-}
-
 function jorgeMorreu() {
     return vidaValor <= 0;
 }
@@ -78,6 +85,28 @@ function setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Pos
     jorge.style.marginLeft = "10px";
 }
 
+function inimigoSaiuDaTela(inimigoPosition){
+    const pixelLimite = -80;
+    return inimigoPosition < pixelLimite;
+}
+
+function resetarAnimacaoInimigo(){
+    inimigo.classList.add("hide");
+    trocarImagemInimigo();
+    setTimeout(() => {
+        inimigo.classList.remove("hide");
+    }, 1000);
+    
+}
+
+function obterMensagemInformativaAleatoria(){
+    return mensagensInformativasPossiveis[Math.floor(Math.random() * mensagensInformativasPossiveis.length)];
+}
+
+function exibirPopUpMsgAleatoria(msg){
+    Swal.fire(msg);
+}
+
 const loop = setInterval(() => {
     const inimigoPosition = inimigo.offsetLeft;
     const ponte1Position = ponte1.offsetLeft;
@@ -88,15 +117,18 @@ const loop = setInterval(() => {
 
     if (inimigoEncostou(inimigoPosition, jorgePosition)) {
         vidaValor = vidaValor - 49;
-        //trocarImagemInimigo();
         console.log(vidaValor);
-        if (jorgeMorreu()) {
-            setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position);
 
+        if (jorgeMorreu()) {
+            exibirPopUpMsgAleatoria(obterMensagemInformativaAleatoria());
+            setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position);
             clearInterval(loop);
+        }else{
+            resetarAnimacaoInimigo();
         }
+        
     }
-    if (inimigoPosition < -80) {
+    if (inimigoSaiuDaTela(inimigoPosition)) {
         trocarImagemInimigo();
     }
 }, 10);

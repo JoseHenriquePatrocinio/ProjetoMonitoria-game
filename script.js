@@ -50,10 +50,32 @@ function trocarImagemInimigo() {
 }
 
 function reiniciarAnimacaoInimigo() {
-    //TODO onde paramos
     inimigo.classList.remove("inimigo-animation");
     inimigo.classList.add("inimigo-animation");
     console.log("chegous");
+}
+
+function jorgeMorreu() {
+    return vidaValor <= 0;
+}
+
+function setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position) {
+    console.log("morreu");
+    inimigo.style.animation = "none";
+    inimigo.style.left = `${inimigoPosition}px`;
+
+    ponte1.style.animation = "none";
+    ponte1.style.left = `${ponte1Position}px`;
+
+    ponte2.style.animation = "none";
+    ponte2.style.left = `${ponte2Position}px`;
+
+    jorge.style.animation = "none";
+    jorge.style.bottom = `${jorgePosition}px`;
+
+    jorge.src = "/imgs/dano/morto.gif";
+    jorge.style.width = "150px";
+    jorge.style.marginLeft = "10px";
 }
 
 const loop = setInterval(() => {
@@ -64,30 +86,13 @@ const loop = setInterval(() => {
         .getComputedStyle(jorge)
         .bottom.replace("px", "");
 
-    // console.log(inimigoPosition);
-
     if (inimigoEncostou(inimigoPosition, jorgePosition)) {
         vidaValor = vidaValor - 49;
-        reiniciarAnimacaoInimigo();
-        trocarImagemInimigo();
+        //trocarImagemInimigo();
         console.log(vidaValor);
-        if (vidaValor <= 0) {
-            console.log("morreu");
-            inimigo.style.animation = "none";
-            inimigo.style.left = `${inimigoPosition}px`;
+        if (jorgeMorreu(inimigoPosition, jorgePosition, ponte1Position, ponte2Position)) {
+            setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position);
 
-            ponte1.style.animation = "none";
-            ponte1.style.left = `${ponte1Position}px`;
-
-            ponte2.style.animation = "none";
-            ponte2.style.left = `${ponte2Position}px`;
-
-            jorge.style.animation = "none";
-            jorge.style.bottom = `${jorgePosition}px`;
-
-            jorge.src = "/imgs/dano/morto.gif";
-            jorge.style.width = "150px";
-            jorge.style.marginLeft = "10px";
             clearInterval(loop);
         }
     }

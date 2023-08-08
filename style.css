@@ -86,6 +86,37 @@
     z-index: 1;
 }
 
+.vida {
+    width: 200px;
+    height: 20px;
+    background-color: #ddd;
+    border: 1px solid #000;
+    position: relative;
+    top: 20px;
+    left: 30px;
+    border-radius: 10px;
+  }
+  
+  .vida-atual {
+    height: 100%;
+    width: 100%;
+    background-color: #00cc00;
+    transition: width 0.5s ease-in-out;
+    border-radius: 10px;
+  }
+
+  .hide {
+    display: none;
+}
+
+  .coracao {
+    position: absolute;
+    top: -32px; 
+    left: -35px;
+    width: 250px; 
+    z-index: 1000;
+}
+
 @media screen and (max-width: 600px) {
     .jorge {
         width: 90px;

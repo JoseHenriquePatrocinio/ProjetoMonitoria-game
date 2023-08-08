@@ -2,7 +2,7 @@ const jorge = document.querySelector("#jorge");
 const inimigo = document.querySelector("#inimigo");
 const ponte1 = document.querySelector(".ponte1");
 const ponte2 = document.querySelector(".ponte2");
-const vidaImagem = document.querySelector(".vida");
+const vidaImagem = document.querySelector("#vida");
 let vidaValor = 100;
 
 const mensagensInformativasPossiveis = [
@@ -33,11 +33,9 @@ const jump = () => {
 };
 
 setTimeout(function () {
-    const inimigoElement = document.getElementById("inimigo");
-    const jorgeElement = document.getElementById("jorge");
-
-    jorgeElement.classList.remove("hide");
-    inimigoElement.classList.remove("hide");
+    jorge.classList.remove("hide");
+    inimigo.classList.remove("hide");
+    vidaImagem.classList.remove("hide");
 }, 7500);
 
 function removeImages() {
@@ -51,6 +49,15 @@ function removeImages() {
     if (loadImg) {
         loadImg.parentNode.removeChild(loadImg);
     }
+}
+
+function diminuirVida(valor) {
+    vidaValor -= valor;
+    if (vidaValor < 0) {
+        vidaValor = 0;
+    }
+    const vidaAtual = document.querySelector(".vida-atual");
+    vidaAtual.style.width = `${vidaValor}%`;
 }
 
 function inimigoEncostou(inimigoPosition, jorgePosition) {
@@ -111,23 +118,22 @@ const loop = setInterval(() => {
     const inimigoPosition = inimigo.offsetLeft;
     const ponte1Position = ponte1.offsetLeft;
     const ponte2Position = ponte2.offsetLeft;
-    const jorgePosition = window
-        .getComputedStyle(jorge)
-        .bottom.replace("px", "");
+    const jorgePosition = parseFloat(
+        window.getComputedStyle(jorge).bottom.replace("px", "")
+    );
 
     if (inimigoEncostou(inimigoPosition, jorgePosition)) {
-        vidaValor = vidaValor - 49;
-        console.log(vidaValor);
+        diminuirVida(35);
 
         if (jorgeMorreu()) {
             exibirPopUpMsgAleatoria(obterMensagemInformativaAleatoria());
             setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position);
             clearInterval(loop);
-        }else{
+        } else {
             resetarAnimacaoInimigo();
         }
-        
     }
+
     if (inimigoSaiuDaTela(inimigoPosition)) {
         trocarImagemInimigo();
     }

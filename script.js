@@ -51,7 +51,18 @@ function removeImages() {
     }
 }
 
-function diminuirVida(valor) {
+function alterarImagemJorge() {
+    if (vidaValor >= 66) {
+        jorge.src = "/imgs/movimento/estagio1caminhando.gif";
+    } else if (vidaValor < 66 && vidaValor >= 33) {
+        jorge.src = "/imgs/movimento/estagio2caminhando.gif";
+    }
+    else if (vidaValor > 33) {
+        jorge.src = "/imgs/movimento/estagio3caminhando.gif";
+    }
+}
+
+function diminuirVida(valor) {  //TODO - inserir validação de quantidade de vida e alterar a imagem do personagem
     vidaValor -= valor;
     if (vidaValor < 0) {
         vidaValor = 0;
@@ -124,6 +135,7 @@ const loop = setInterval(() => {
 
     if (inimigoEncostou(inimigoPosition, jorgePosition)) {
         diminuirVida(35);
+        alterarImagemJorge();
 
         if (jorgeMorreu()) {
             exibirPopUpMsgAleatoria(obterMensagemInformativaAleatoria());

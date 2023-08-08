@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+/* Modal */
+.swal2-popup, .dswal2-modal, .swal2-show{
+    background-color: #000;
+    color: #fff;
+}
+
 .game-board {
     height: 100vh;
     width: 100vw;

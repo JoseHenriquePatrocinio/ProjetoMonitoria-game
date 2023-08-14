@@ -24,12 +24,36 @@ const inimigosPosiveis = [
     "/imgs/inimigos/vape.gif",
 ];
 
+const imagensJorgeCaminhando = [
+    "/imgs/movimento/estagio1caminhando.gif",
+    "/imgs/movimento/estagio2caminhando.gif",
+    "/imgs/movimento/estagio3caminhando.gif"
+];
+
+const imagensJorgePulando = [
+    "/imgs/pulo/estagio1pulando.gif",
+    "/imgs/pulo/estagio2pulando.gif",
+    "/imgs/pulo/estagio3pulando.gif"
+];
+
 const jump = () => {
     jorge.classList.add("jump");
+    let jorgeImg = jorge.src;
+
+    if (vidaValor >= 66) {
+        jorge.src = imagensJorgePulando[0];
+    } else if (vidaValor < 66 && vidaValor >= 33) {
+        jorge.src = imagensJorgePulando[1];
+    }
+    else if (vidaValor < 33) {
+        jorge.src = imagensJorgePulando[2];
+    }
 
     setTimeout(() => {
+        jorge.src = jorgeImg;
         jorge.classList.remove("jump");
-    }, 800);
+    }, 900);
+   
 };
 
 setTimeout(function () {
@@ -53,22 +77,23 @@ function removeImages() {
 
 function alterarImagemJorge() {
     if (vidaValor >= 66) {
-        jorge.src = "/imgs/movimento/estagio1caminhando.gif";
+        jorge.src = imagensJorgeCaminhando[0];
     } else if (vidaValor < 66 && vidaValor >= 33) {
-        jorge.src = "/imgs/movimento/estagio2caminhando.gif";
+        jorge.src = imagensJorgeCaminhando[1];
     }
-    else if (vidaValor > 33) {
-        jorge.src = "/imgs/movimento/estagio3caminhando.gif";
+    else if (vidaValor < 33) {
+        jorge.src = imagensJorgeCaminhando[2];
     }
 }
 
-function diminuirVida(valor) {  //TODO - inserir validação de quantidade de vida e alterar a imagem do personagem
+function diminuirVida(valor) {
     vidaValor -= valor;
     if (vidaValor < 0) {
         vidaValor = 0;
     }
     const vidaAtual = document.querySelector(".vida-atual");
     vidaAtual.style.width = `${vidaValor}%`;
+    console.log(vidaValor);
 }
 
 function inimigoEncostou(inimigoPosition, jorgePosition) {

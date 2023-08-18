@@ -3,19 +3,20 @@ const inimigo = document.querySelector("#inimigo");
 const ponte1 = document.querySelector(".ponte1");
 const ponte2 = document.querySelector(".ponte2");
 const vidaImagem = document.querySelector("#vida");
+
+let contagemInimigos = 0;
+
 let vidaValor = 100;
 
+let nicotinaTotal = 0;
+
 const mensagensInformativasPossiveis = [
-    `
-    Você sabia que o tabagismo é a maior causa de morte evitável do mundo?
-    Além de doenças respiratórias, o tabagismo causa impotência, infertilidade e úlcera.
-    O tabagismo pode causar cânceres de boca, faringe e laringe.
-    `,
-    `
-    O Brasil está no 8º lugar dos países que mais fumam. Você faz parte disso!
-    Fumar encurta 11 anos de sua vida. 
-    Após deixar o cigarro, o seu coração volta ao normal após  15 anos.
-    `,
+    `Você sabia que o tabagismo é a maior causa de morte evitável do mundo?`,
+    `Além de doenças respiratórias, o tabagismo causa impotência, infertilidade e úlcera. `,
+    `O tabagismo pode causar cânceres de boca, faringe e laringe.`,
+    `O Brasil está no 8º lugar dos países que mais fumam. Você faz parte disso!`,
+    `Fumar encurta 11 anos de sua vida.`,
+    `Após deixar o cigarro, o seu coração volta ao normal após 15 anos.`,
 ];
 
 const inimigosPosiveis = [
@@ -56,6 +57,10 @@ const jump = () => {
    
 };
 
+function restartPage(){
+    location.reload();
+}
+
 setTimeout(function () {
     jorge.classList.remove("hide");
     inimigo.classList.remove("hide");
@@ -86,14 +91,30 @@ function alterarImagemJorge() {
     }
 }
 
-function diminuirVida(valor) {
-    vidaValor -= valor;
+function getDanoInimigo(){
+    let dano = 0;
+
+    if(inimigo.src.includes("cigarro")){
+        dano = 10;
+    }else if(inimigo.src.includes("vape")){
+        dano = 20;
+    }else if(inimigo.src.includes("narguile")){
+        dano = 40;
+    }
+   
+    return dano;
+}
+
+function diminuirVida() {
+    let dano = getDanoInimigo();
+    console.log(dano)
+
+    vidaValor -= dano;
     if (vidaValor < 0) {
         vidaValor = 0;
     }
     const vidaAtual = document.querySelector(".vida-atual");
     vidaAtual.style.width = `${vidaValor}%`;
-    console.log(vidaValor);
 }
 
 function inimigoEncostou(inimigoPosition, jorgePosition) {
@@ -110,7 +131,6 @@ function jorgeMorreu() {
 }
 
 function setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position) {
-    console.log("morreu");
     inimigo.style.animation = "none";
     inimigo.style.left = `${inimigoPosition}px`;
 
@@ -130,7 +150,7 @@ function setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Pos
 
 function inimigoSaiuDaTela(inimigoPosition){
     const pixelLimite = -80;
-    return inimigoPosition < pixelLimite;
+    return inimigoPosition <= pixelLimite && inimigoPosition >= pixelLimite - 8;
 }
 
 function resetarAnimacaoInimigo(){
@@ -139,18 +159,79 @@ function resetarAnimacaoInimigo(){
     setTimeout(() => {
         inimigo.classList.remove("hide");
     }, 1000);
-    
 }
 
 function obterMensagemInformativaAleatoria(){
     return mensagensInformativasPossiveis[Math.floor(Math.random() * mensagensInformativasPossiveis.length)];
 }
 
-function exibirPopUpMsgAleatoria(msg){
-    Swal.fire(msg);
+function exibirPopUpMsg(msg){
+    Swal.fire({
+        backgroundImg: "/imgs/inimigos/cigarro.gif",
+        title: "Você Sabia?",
+        text: msg,
+        icon: "question",
+        confirmButtonText: "OK",
+        confirmButtonColor: "#ff0000"
+    });
 }
 
+function getMensagemMorte(){
+    const msg = `Parabéns, você virou estatística! Mais uma morte para a indústria do tabaco.
+    Quantidade de nicotina consumida: ${nicotinaTotal}mg`;
+    return msg;
+}
+
+function exibirPopUpMorte(){
+    const msg = getMensagemMorte();
+    Swal.fire({
+        title: "Você morreu!",
+        text: msg,
+        icon: "error",
+        confirmButtonText: "Recomeçar",
+        confirmButtonColor: "#ff0000"
+    }).then((result) => {
+        if(result.isConfirmed){
+            restartPage();
+        }
+    });
+}
+
+function validaExibirMsgInformativa(){
+    if(contagemInimigos % 5 == 0){
+        console.log("exibir msg informativa");
+        
+        inimigo.classList.add("hide");
+        let a = exibirPopUpMsg(obterMensagemInformativaAleatoria());
+        setTimeout(() => {
+            try{
+                document.querySelector(".swal2-confirm").click();
+            }catch(e){}
+
+            setTimeout(() => {
+                inimigo.classList.remove("hide")
+            }, 1000);
+        }, 5000);
+    }
+}
+
+function incrementarNicotina(){
+    let nicotina = 0;
+
+    if(inimigo.src.includes("cigarro")){
+        nicotina = 1;
+    }else if(inimigo.src.includes("vape")){
+        nicotina = 55;
+    }else if(inimigo.src.includes("narguile")){
+        nicotina = 100;
+    }
+   
+    nicotinaTotal += nicotina;
+}
+
+
 const loop = setInterval(() => {
+
     const inimigoPosition = inimigo.offsetLeft;
     const ponte1Position = ponte1.offsetLeft;
     const ponte2Position = ponte2.offsetLeft;
@@ -158,12 +239,13 @@ const loop = setInterval(() => {
         window.getComputedStyle(jorge).bottom.replace("px", "")
     );
 
-    if (inimigoEncostou(inimigoPosition, jorgePosition)) {
-        diminuirVida(35);
+    if (inimigoEncostou(inimigoPosition, jorgePosition)){
         alterarImagemJorge();
-
+        diminuirVida();
+        incrementarNicotina();
+    
         if (jorgeMorreu()) {
-            exibirPopUpMsgAleatoria(obterMensagemInformativaAleatoria());
+            exibirPopUpMorte();
             setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position);
             clearInterval(loop);
         } else {
@@ -172,6 +254,9 @@ const loop = setInterval(() => {
     }
 
     if (inimigoSaiuDaTela(inimigoPosition)) {
+        console.log("inimigo Saiu Da Tela");
+        validaExibirMsgInformativa();
+        contagemInimigos++;
         trocarImagemInimigo();
     }
 }, 10);

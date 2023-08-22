@@ -43,6 +43,12 @@ const imagensJorgePulando = [
     "/imgs/pulo/estagio3pulando.gif"
 ];
 
+const imagensJorgeDano = [
+    "/imgs/dano/estagio1dano.gif",
+    "/imgs/dano/estagio2dano.gif",
+    "/imgs/dano/estagio3dano.gif"
+];
+
 const jump = () => {
     const currentTime = Date.now();
     
@@ -93,14 +99,23 @@ function removeImages() {
 
 function alterarImagemJorge() {
     if (vidaValor >= 66) {
-        jorge.src = imagensJorgeCaminhando[0];
+        jorge.src = imagensJorgeDano[0];
+        setTimeout(function() {
+            jorge.src = imagensJorgeCaminhando[0];
+        }, 500);
     } else if (vidaValor < 66 && vidaValor >= 33) {
-        jorge.src = imagensJorgeCaminhando[1];
-    }
-    else if (vidaValor < 33) {
-        jorge.src = imagensJorgeCaminhando[2];
+        jorge.src = imagensJorgeDano[1];
+        setTimeout(function() {
+            jorge.src = imagensJorgeCaminhando[1];
+        }, 500);
+    } else if (vidaValor < 33) {
+        jorge.src = imagensJorgeDano[2];
+       timeoutID = setTimeout(function() {
+            jorge.src = imagensJorgeCaminhando[2];
+        }, 500);
     }
 }
+
 
 function getDanoInimigo(){
     let dano = 0;
@@ -121,9 +136,7 @@ function diminuirVida() {
     console.log(dano)
 
     vidaValor -= dano;
-    if (vidaValor < 0) {
-        vidaValor = 0;
-    }
+  
     const vidaAtual = document.querySelector(".vida-atual");
     vidaAtual.style.width = `${vidaValor}%`;
 }
@@ -209,7 +222,6 @@ function exibirPopUpMorte(){
 }
 
 function validaExibirMsgInformativa(){
-    if(contagemInimigos % 5 == 0){
     if(contagemInimigos % 6 == 0){
         console.log("exibir msg informativa");
         
@@ -252,11 +264,12 @@ const loop = setInterval(() => {
     );
 
     if (inimigoEncostou(inimigoPosition, jorgePosition)){
-        alterarImagemJorge();
         diminuirVida();
+        alterarImagemJorge();   
         incrementarNicotina();
     
         if (jorgeMorreu()) {
+            clearTimeout(timeoutID);
             exibirPopUpMorte();
             setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Position);
             clearInterval(loop);

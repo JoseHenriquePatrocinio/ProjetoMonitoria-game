@@ -4,6 +4,8 @@ const ponte1 = document.querySelector(".ponte1");
 const ponte2 = document.querySelector(".ponte2");
 const vidaImagem = document.querySelector("#vida");
 
+var timeoutID;
+
 let contagemInimigos = 0;
 
 let vidaValor = 100;
@@ -11,6 +13,9 @@ let vidaValor = 100;
 let nicotinaTotal = 0;
 
 let lastJumpTime = 0;
+
+let animationDuration = 3;
+
 const mensagensInformativasPossiveis = [
     `Você sabia que o tabagismo é a maior causa de morte evitável do mundo?`,
     `Além de doenças respiratórias, o tabagismo causa impotência, infertilidade e úlcera. `,
@@ -205,6 +210,7 @@ function exibirPopUpMorte(){
 
 function validaExibirMsgInformativa(){
     if(contagemInimigos % 5 == 0){
+    if(contagemInimigos % 6 == 0){
         console.log("exibir msg informativa");
         
         inimigo.classList.add("hide");
@@ -266,6 +272,21 @@ const loop = setInterval(() => {
         trocarImagemInimigo();
     }
 }, 10);
+
+function updateAnimationDuration() {
+    inimigo.style.animationDuration = `${animationDuration}s`;
+}
+
+updateAnimationDuration();
+
+setInterval(() => {
+    if (animationDuration > 1.1) {
+        animationDuration -= 0.3;
+    } else {
+        animationDuration = 1.1; 
+    }
+    updateAnimationDuration();
+}, 18000);
 
 document.addEventListener("click", jump);
 document.addEventListener("keydown", jump);

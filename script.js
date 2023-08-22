@@ -10,6 +10,7 @@ let vidaValor = 100;
 
 let nicotinaTotal = 0;
 
+let lastJumpTime = 0;
 const mensagensInformativasPossiveis = [
     `Você sabia que o tabagismo é a maior causa de morte evitável do mundo?`,
     `Além de doenças respiratórias, o tabagismo causa impotência, infertilidade e úlcera. `,
@@ -38,23 +39,28 @@ const imagensJorgePulando = [
 ];
 
 const jump = () => {
-    jorge.classList.add("jump");
-    let jorgeImg = jorge.src;
+    const currentTime = Date.now();
+    
+    if (currentTime - lastJumpTime >= 1000) { 
+        lastJumpTime = currentTime;
 
-    if (vidaValor >= 66) {
-        jorge.src = imagensJorgePulando[0];
-    } else if (vidaValor < 66 && vidaValor >= 33) {
-        jorge.src = imagensJorgePulando[1];
-    }
-    else if (vidaValor < 33) {
-        jorge.src = imagensJorgePulando[2];
-    }
+        jorge.classList.add("jump");
+        let jorgeImg = jorge.src;
 
-    setTimeout(() => {
-        jorge.src = jorgeImg;
-        jorge.classList.remove("jump");
-    }, 900);
-   
+        if (vidaValor >= 66) {
+            jorge.src = imagensJorgePulando[0];
+        } else if (vidaValor < 66 && vidaValor >= 33) {
+            jorge.src = imagensJorgePulando[1];
+        }
+        else if (vidaValor < 33) {
+            jorge.src = imagensJorgePulando[2];
+        }
+
+        setTimeout(() => {
+            jorge.src = jorgeImg;
+            jorge.classList.remove("jump");
+        }, 900);
+    }
 };
 
 function restartPage(){

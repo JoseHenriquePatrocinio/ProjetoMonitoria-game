@@ -126,6 +126,16 @@
     z-index: 1000;
 }
 
+.pontuacao {
+    position: absolute;
+    top: 15px;
+    left: 390px;
+    font-size: 40px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
 
 @media screen and (max-width: 600px) {
     .jorge {

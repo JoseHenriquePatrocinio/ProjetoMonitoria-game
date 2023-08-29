@@ -3,6 +3,7 @@ const inimigo = document.querySelector("#inimigo");
 const ponte1 = document.querySelector(".ponte1");
 const ponte2 = document.querySelector(".ponte2");
 const vidaImagem = document.querySelector("#vida");
+const pontuacao = document.querySelector("#pontuacaoValor");
 
 var timeoutID;
 
@@ -15,6 +16,10 @@ let nicotinaTotal = 0;
 let lastJumpTime = 0;
 
 let animationDuration = 3;
+
+let pontuacaoTotal = 0;
+
+const pontosPorSegundo = 50;
 
 const mensagensInformativasPossiveis = [
     `Você sabia que o tabagismo é a maior causa de morte evitável do mundo?`,
@@ -74,6 +79,18 @@ const jump = () => {
     }
 };
 
+function aumentarPontuacao() {
+    if (!jorgeMorreu()) {
+        pontuacaoTotal += pontosPorSegundo;
+        const pontuacaoElement = document.getElementById("pontuacaoValor");
+        pontuacaoElement.textContent = pontuacaoTotal;
+    }
+}
+
+setTimeout(() => {
+    setInterval(aumentarPontuacao, 1000); // Aumenta a pontuação a cada 1 segundo (1000ms)
+}, 7500);
+
 function restartPage(){
     location.reload();
 }
@@ -82,6 +99,7 @@ setTimeout(function () {
     jorge.classList.remove("hide");
     inimigo.classList.remove("hide");
     vidaImagem.classList.remove("hide");
+    pontuacao.classList.remove("hide");
 }, 7500);
 
 function removeImages() {
@@ -206,9 +224,10 @@ function getMensagemMorte(){
 }
 
 function exibirPopUpMorte(){
+    let titulo = `Você morreu! Pontuação total: ${pontuacaoTotal}`;
     const msg = getMensagemMorte();
     Swal.fire({
-        title: "Você morreu!",
+        title: titulo,
         text: msg,
         icon: "error",
         confirmButtonText: "Recomeçar",
@@ -292,6 +311,10 @@ function updateDificuldade() {
     }  
     if (animationDuration < 1.1){
         animationDuration = 1.1; 
+    }
+
+    if (pontuacaoTotal >= 6000){
+        animationDuration = 0.9; 
     }
 
     inimigo.style.animationDuration = `${animationDuration}s`;

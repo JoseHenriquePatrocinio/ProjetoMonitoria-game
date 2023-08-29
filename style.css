@@ -20,8 +20,9 @@
 
 .background {
     position: absolute;
-    height: 100%;
+    height: 140vh; /* Ajuste a altura para esticar mais para baixo */
     width: 100vw;
+    bottom: -40vh; /* Ajuste esse valor para esticar mais para baixo */
 }
 
 .background2 {
@@ -45,6 +46,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    bottom: -145px;
     animation: ponte-animation 15s infinite linear;
 }
 
@@ -52,6 +54,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    bottom: -145px;
     animation: ponte-animation 15s infinite linear;
     animation-delay: 7.5s;
 }
@@ -68,7 +71,7 @@
 .inimigo {
     right: 0%;
     position: absolute;
-    bottom: -5px;
+    bottom: 18px;
     width: 140px;
     animation: inimigo-animation 2s infinite linear;
 }

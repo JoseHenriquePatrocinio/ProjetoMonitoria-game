@@ -191,7 +191,6 @@ function obterMensagemInformativaAleatoria(){
 
 function exibirPopUpMsg(msg){
     Swal.fire({
-        backgroundImg: "/imgs/inimigos/cigarro.gif",
         title: "Você Sabia?",
         text: msg,
         icon: "question",
@@ -224,7 +223,7 @@ function exibirPopUpMorte(){
 function validaExibirMsgInformativa(){
     if(contagemInimigos % 6 == 0){
         console.log("exibir msg informativa");
-        
+        updateDificuldade();
         inimigo.classList.add("hide");
         let a = exibirPopUpMsg(obterMensagemInformativaAleatoria());
         setTimeout(() => {
@@ -286,20 +285,17 @@ const loop = setInterval(() => {
     }
 }, 10);
 
-function updateAnimationDuration() {
-    inimigo.style.animationDuration = `${animationDuration}s`;
-}
+function updateDificuldade() {
 
-updateAnimationDuration();
-
-setInterval(() => {
     if (animationDuration > 1.1) {
         animationDuration -= 0.3;
-    } else {
+    }  
+    if (animationDuration < 1.1){
         animationDuration = 1.1; 
     }
-    updateAnimationDuration();
-}, 18000);
+
+    inimigo.style.animationDuration = `${animationDuration}s`;
+}
 
 document.addEventListener("click", jump);
 document.addEventListener("keydown", jump);

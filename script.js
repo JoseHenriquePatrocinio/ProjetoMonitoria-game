@@ -168,7 +168,7 @@ function setMorteJorge(inimigoPosition, jorgePosition, ponte1Position, ponte2Pos
     jorge.style.bottom = `${jorgePosition}px`;
 
     jorge.src = "/imgs/dano/morto.gif";
-    jorge.style.width = "150px";
+    jorge.style.width = "190px";
     jorge.style.marginLeft = "10px";
 }
 

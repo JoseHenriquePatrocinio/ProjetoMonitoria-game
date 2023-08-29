@@ -137,34 +137,39 @@
     border-radius: 5px;
 }
 
-@media screen and (max-width: 600px) {
-    .jorge {
-        width: 90px;
-        position: absolute;
-        bottom: 0;
-    }
-    .hide {
-        display: none;
+@media (max-width: 900px) and (orientation: landscape) {
+    .game-board {
+        height: 100vh;
+        width: 100vw;
     }
 
-    .inimigo {
-        right: 0%;
-        position: absolute;
-        bottom: -5px;
-        width: 80px;
+    .background {
+        height: 140vh;
+        bottom: -40vh;
     }
 
-    .inimigo-animation {
-        animation: inimigo-animation 3s infinite linear;
+    .load,
+    .ponte1,
+    .ponte2,
+    .jorge,
+    .inimigo,
+    .coracao,
+    .pontuacao {
+        display: block;
     }
 
-    .load {
-        position: absolute;
-        width: 40%;
-        height: 20%;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .restart-btn {
+        top: 20px;
+        right: 10px;
+        margin-left: 20px;
+        font-size: 24px;
+    }
+
+    .vida,
+    .vida-atual {
+        top: 30px;
+        left: 40px;
+        transform: none;
     }
 }
 

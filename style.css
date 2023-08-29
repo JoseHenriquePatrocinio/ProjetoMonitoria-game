@@ -137,42 +137,6 @@
     border-radius: 5px;
 }
 
-@media (max-width: 900px) and (orientation: landscape) {
-    .game-board {
-        height: 100vh;
-        width: 100vw;
-    }
-
-    .background {
-        height: 140vh;
-        bottom: -40vh;
-    }
-
-    .load,
-    .ponte1,
-    .ponte2,
-    .jorge,
-    .inimigo,
-    .coracao,
-    .pontuacao {
-        display: block;
-    }
-
-    .restart-btn {
-        top: 20px;
-        right: 10px;
-        margin-left: 20px;
-        font-size: 24px;
-    }
-
-    .vida,
-    .vida-atual {
-        top: 30px;
-        left: 40px;
-        transform: none;
-    }
-}
-
 @keyframes inimigo-animation {
     from {
         right: 0%;

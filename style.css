@@ -4,6 +4,12 @@
     box-sizing: border-box;
 }
 
+body {
+    zoom: 1.0;
+    transform: scale(1.0);
+    transform-origin: top;
+}
+
 /* Modal */
 .swal2-popup, .dswal2-modal, .swal2-show{
     background-color: #000;
@@ -20,9 +26,9 @@
 
 .background {
     position: absolute;
-    height: 140vh; /* Ajuste a altura para esticar mais para baixo */
+    height: 140vh; 
     width: 100vw;
-    bottom: -40vh; /* Ajuste esse valor para esticar mais para baixo */
+    bottom: -40vh; 
 }
 
 .background2 {
@@ -46,7 +52,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    bottom: -145px;
+    bottom: -135px;
     animation: ponte-animation 15s infinite linear;
 }
 
@@ -54,7 +60,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    bottom: -145px;
+    bottom: -135px;
     animation: ponte-animation 15s infinite linear;
     animation-delay: 7.5s;
 }

@@ -240,7 +240,7 @@ function exibirPopUpMorte(){
 }
 
 function validaExibirMsgInformativa(){
-    if(contagemInimigos % 6 == 0){
+    if(contagemInimigos % 8 == 0){
         console.log("exibir msg informativa");
         updateDificuldade();
         inimigo.classList.add("hide");
@@ -306,15 +306,15 @@ const loop = setInterval(() => {
 
 function updateDificuldade() {
 
-    if (animationDuration > 1.1) {
+    if (animationDuration > 1.3) {
         animationDuration -= 0.3;
     }  
-    if (animationDuration < 1.1){
-        animationDuration = 1.1; 
+if (animationDuration < 1.3){
+        animationDuration = 1.3; 
     }
 
     if (pontuacaoTotal >= 6000){
-        animationDuration = 0.9; 
+        animationDuration = 1.0; 
     }
 
     inimigo.style.animationDuration = `${animationDuration}s`;

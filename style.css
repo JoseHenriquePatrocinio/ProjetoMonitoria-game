@@ -2,76 +2,91 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-  
-  .game-board {
+}
+
+body {
+    zoom: 1.0;
+    transform: scale(1.0);
+    transform-origin: top;
+}
+
+/* Modal */
+.swal2-popup, .dswal2-modal, .swal2-show{
+    background-color: #000;
+    color: #fff;
+}
+
+.game-board {
     height: 100vh;
     width: 100vw;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
-  }
-  
-  .background{
-    position: absolute;
-    height: 100%;
-    width: 100vw;
-  }
+}
 
-  .background2 {
+.background {
+    position: absolute;
+    height: 140vh; 
+    width: 100vw;
+    bottom: -40vh; 
+}
+
+.background2 {
     position: absolute;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-  }
+}
 
-  .load {
+.load {
     position: absolute;
     width: 30%;
     height: 20%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }    
-  
-  .ponte1{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: ponte-animation 15s infinite linear;
-  }
+}
 
-  .ponte2{
+.ponte1 {
     position: absolute;
     width: 100%;
     height: 100%;
+    bottom: -135px;
+    animation: ponte-animation 15s infinite linear;
+}
+
+.ponte2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: -135px;
     animation: ponte-animation 15s infinite linear;
     animation-delay: 7.5s;
-  }
-  
-  .jorge {
-    width: 150px;
+}
+
+.jorge {
+    width: 190px;
     position: absolute;
     bottom: 0;
-  }
-  .hide {
+}
+.hide {
     display: none;
-  }
-  
-  .inimigo {
+}
+
+.inimigo {
     right: 0%;
     position: absolute;
-    bottom: -5px;
-    width: 140px;
-    animation: inimigo-animation 3s infinite linear;
-  }
+    bottom: 18px;
+    width: 175px;
+    animation: inimigo-animation 2s infinite linear;
+}
 
-  .hide {
+.hide {
     display: none;
-  }
+}
 
-  .restart-btn {
+.restart-btn {
     position: absolute;
     top: 20px;
     right: 10px;
@@ -84,81 +99,92 @@
     font-size: 24px;
     cursor: pointer;
     z-index: 1;
-  }
-
-  @media screen and (max-width: 600px) {
-
-    .jorge {
-      width: 90px;
-      position: absolute;
-      bottom: 0;
-    }
-    .hide {
-      display: none;
-    }
-    
-    .inimigo {
-      right: 0%;
-      position: absolute;
-      bottom: -5px;
-      width: 80px;
-      animation: inimigo-animation 3s infinite linear;
-    }
-
-    .load {
-      position: absolute;
-      width: 40%;
-      height: 20%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    } 
-
 }
-  
-  
-  @keyframes inimigo-animation {
+
+.vida {
+    width: 300px; 
+    height: 30px;
+    background-color: #ddd;
+    border: 1px solid #000;
+    position: relative;
+    top: 30px;
+    left: 40px; 
+    border-radius: 15px; 
+}
+
+.vida-atual {
+    height: 100%;
+    width: 100%;
+    background-color: #00cc00;
+    transition: width 0.5s ease-in-out;
+    border-radius: 15px; 
+}
+
+.hide {
+    display: none;
+}
+
+.coracao {
+    position: absolute;
+    top: -45px; 
+    left: -45px; 
+    width: 370px; 
+    z-index: 1000;
+}
+
+.pontuacao {
+    position: absolute;
+    top: 15px;
+    left: 390px;
+    font-size: 40px;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+@keyframes inimigo-animation {
     from {
-      right: 0%;
+        right: 0%;
     }
-  
+
     to {
-      right: 100%;
+        right: 100%;
     }
-  }
-  
-  @keyframes jump {
+}
+
+@keyframes jump {
     0% {
-      bottom: 0;
+        bottom: 0;
     }
-  
+
     40% {
-      bottom: 180px;
+        bottom: 180px;
     }
-  
+
     50% {
-      bottom: 180px;
+        bottom: 180px;
     }
-  
+
     60% {
-      bottom: 180px;
+        bottom: 180px;
     }
-  
+
     100% {
-      bottom: 0;
+        bottom: 0;
     }
-  }
+}
 
-  .jump {
+.jump {
     animation: jump 1s ease-in-out;
-  }
-  
-@keyframes ponte-animation {
-  from {
-    right: -100%;
-  }
+}
 
-  to {
-    right: 100%;
-  }
+@keyframes ponte-animation {
+    from {
+        right: -100%;
+    }
+
+    to {
+        right: 100%;
+    }
 }
